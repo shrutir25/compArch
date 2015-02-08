@@ -1,0 +1,33 @@
+import sys
+import random
+import threading
+
+matrixDim = 1000
+randomMaxValue = 100
+count = 0
+
+matrixA = [[0 for i in range(matrixDim)] for j in range(matrixDim)]
+matrixB = [[0 for i in range(matrixDim)] for j in range(matrixDim)]
+matrixC = [[0 for i in range(matrixDim)] for j in range(matrixDim)]
+
+for i in range (0,matrixDim):
+    for j in range (0,matrixDim):
+
+           matrixA[i][j] = random.randint(0, randomMaxValue)
+           matrixB[i][j] = random.randint(0, randomMaxValue)
+
+
+for m in range (0,matrixDim):
+ try:
+   thread.start_new_thread( matrixMul, (matrixA[m]))
+ except:
+   print "Error: unable to start thread"
+
+
+def matrixMul(args):
+    count = count + 1
+    l = 0
+for i in range (0,matrixDim):
+    for j in range (0,matrixDim):
+           matrixC[count][i] += args[j]* matrixB[j][l]
+l = l + 1
